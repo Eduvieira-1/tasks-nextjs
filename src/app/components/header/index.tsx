@@ -1,7 +1,16 @@
+'use client';
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Header() {
+export default async function Header() {
+  const session = await getServerSession()
+
+  if(!session) {
+    return redirect('/')
+  }
+
   return (
     <header className={styles.header}>
       <section className={styles.content}>
@@ -16,7 +25,26 @@ export default function Header() {
           </Link>
         </nav>
 
-        <button className={styles.loginButton}>Acessar</button>
+       <div> Olá, {session.user?.name}</div>
+        {/* {status === "loading" ? (
+          <div></div>
+        ) : session ? (
+          <button
+          className={styles.loginButton}
+          onClick={() => signOut()}
+        >
+          Olá {session?.user?.name}
+        </button>
+        ) : (
+          <button
+          className={styles.loginButton}
+          onClick={() => signIn("google")}
+        >
+          Acessar
+        </button>
+        )} */}
+
+        {/* <button className={styles.loginButton}>Acessar</button> */}
       </section>
     </header>
   );
