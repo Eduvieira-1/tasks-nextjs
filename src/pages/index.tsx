@@ -1,9 +1,8 @@
 import Head from "next/head";
-import styles from "../app/styles/home.module.css";
+import styles from "../pages/styles/home.module.css";
 import Image from "next/image";
 
 import heroImg from "../../public/assets/hero.png";
-
 
 export default function Home() {
   return (
